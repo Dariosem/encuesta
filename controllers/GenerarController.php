@@ -4,12 +4,11 @@ namespace app\controllers;
 
 use yii;
 use yii\web\Controller;
+use app\models\Encuesta;
+use app\models\Pregunta;
 
 class GenerarController extends Controller
 {
     
-    public function actionCrear()
-    {
-        return $this->render('index');
-    }
+    
 }
