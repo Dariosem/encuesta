@@ -10,6 +10,6 @@ class GenerarController extends Controller
     
     public function actionCrear()
     {
-        
+        return $this->render('index');
     }
 }
