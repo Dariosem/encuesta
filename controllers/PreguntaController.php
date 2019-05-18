@@ -14,6 +14,13 @@ use yii\filters\VerbFilter;
  */
 class PreguntaController extends Controller
 {
+    public function actionPregunta()
+    {
+        $pregunta="va la pregunta";
+        
+        echo json_encode($pregunta);
+    }
+    
     /**
      * {@inheritdoc}
      */

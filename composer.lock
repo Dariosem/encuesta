@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05251a4beeaa8dfa7849f73389718d5f",
+    "content-hash": "7a9cc2f38e34e3f22f7b8f6361301220",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -616,6 +616,49 @@
                 "shim"
             ],
             "time": "2019-02-06T07:57:58+00:00"
+        },
+        {
+            "name": "vkolya/poll-and-charts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Vkolya/poll-and-charts.git",
+                "reference": "d3102c68d18848ea08a2e2795c30b3bd9fe737c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Vkolya/poll-and-charts/zipball/d3102c68d18848ea08a2e2795c30b3bd9fe737c6",
+                "reference": "d3102c68d18848ea08a2e2795c30b3bd9fe737c6",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "vkolya\\poll\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Mykola Vantukh",
+                    "email": "vkolia@mail.ua"
+                }
+            ],
+            "description": "An widget to create polls and to wrap google chart for Yii Framework 2",
+            "keywords": [
+                "poll",
+                "poll-widget",
+                "widget",
+                "yii2",
+                "yii2-poll-widget"
+            ],
+            "time": "2017-01-26T12:49:49+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -3553,7 +3596,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "vkolya/poll-and-charts": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
