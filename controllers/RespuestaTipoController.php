@@ -15,6 +15,18 @@ use yii\filters\VerbFilter;
 class RespuestaTipoController extends Controller
 {
     /**
+     * Devuelve el listado de los tipos de respuesta posible
+     * @return array
+     */
+    public static function listaTipos()
+    {
+        $opciones=new RespuestaTipo();
+        $lista=$opciones->find()->all();
+        
+        return $lista;
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public function behaviors()

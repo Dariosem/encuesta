@@ -21,7 +21,7 @@ use app\models\RespuestaTipo;
             	    'action'=>['encuesta/crear'],
 	                'options'=>['class'=>'form form-horizontal'],
             	])?>
-            	
+    <?php echo Html::textInput('idPregunta', 0, ['hidden'=>true])?>     	
 	<?= $form->field($model, 'encTitulo')->textInput(['maxlength'=>true])->label('Titulo de la encuesta:')?>
 	<?= $form->field($model, 'encDescripcion')->textInput(['maxlength'=>true])->label('Descripcion de la encuesta:')?>
 	
@@ -30,17 +30,7 @@ use app\models\RespuestaTipo;
 	</div>
 	<div class='container-fluent' id='preguntas'>
     	<?php $items = ArrayHelper::map(RespuestaTipo::find()->all(), 'idRespTipo', 'respTipoDescripcion');?>
-    	<div class='form-group'>
-    		<?= Html::dropDownList('idRespTipo', '', $items, [
-    		                      'class'=>'form-control', 
-    		                      'prompt'=>'Selecciona tipo de respuesta',
-    		                      'style'=>[
-    		                          'max-width'=>'30%',
-    		                          'margin-left'=>'auto',
-    		                       ]
-    		      ]);
-    		?>
-    	</div>
+    	
 	</div>
 	<div id='prueba'></div>
 	
@@ -54,17 +44,18 @@ use app\models\RespuestaTipo;
 $this->registerJs("
 $(document).ready(function(){
     $('#btn-agregar').on('click', function(){
-        
+        var idPregunta=$('#idPregunta').val();
         var x=new XMLHttpRequest();
     	x.onreadystatechange = function(){
     		if( this.readyState == 4 && this.status == 200){
     	        resp=JSON.parse(this.responseText);
-    			$('#prueba').html(resp);
+    			$('#prueba').html(resp[0]);
+                $('#idPregunta').val(resp[1]);
     		}
     	};
-    	x.open('POST', '/encuesta/views/Encuesta/pregunta.php', true);
+    	x.open('POST', '/encuesta/views/Encuesta/generaPregunta.php', true);
     	x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    	x.send();
+    	x.send('idPregunta='+idPregunta);
         
     });
 });

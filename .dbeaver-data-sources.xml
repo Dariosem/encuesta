@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="mysql5-16acacc6fde-740c7d6b2c06f435" provider="mysql" driver="mysql5" name="MySQL - encuesta" save-password="true" read-only="false">
+		<connection host="localhost" port="3306" server="" database="encuesta" url="jdbc:mysql://localhost:3306/encuesta" user="root" type="dev">
+			<property name="connectTimeout" value="20000"/>
+		</connection>
+	</data-source>
+	<filters/>
+</data-sources>
