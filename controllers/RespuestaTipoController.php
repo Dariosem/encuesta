@@ -20,7 +20,7 @@ class RespuestaTipoController extends Controller
      */
     public static function listaTipos()
     {
-        $opciones=new RespuestaTipo();
+        $opciones=new RespuestaTipoSearch();
         $lista=$opciones->find()->all();
         
         return $lista;

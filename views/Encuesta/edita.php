@@ -1,16 +1,26 @@
 <?php
 
+/* En esta vista se genera la edicion de la encuesta. inicialmente presenta la opcion de ingreso del titulo y una descripcion
+ * y luego se pueden agregar las preguntas y el tipo de respuesta que tendra esa pregunta 
+*/
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\View;
 use yii\helpers\ArrayHelper;
 use app\models\RespuestaTipo;
+use app\assets\AppAsset;
+use app\controllers\RespuestaTipoController;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Encuesta */
-/* @var $modelPreg app\models\Pregunta */
-/* @var $model2 app\models\RespuestaTipo */
+/* @var $model2 app\models\Pregunta */
 /* @var $form yii\widgets\ActiveForm */
+
+$opciones=ArrayHelper::map(RespuestaTipoController::listaTipos(), 'idRespTipo', 'respTipoDescripcion');
+
+//$opciones=[0=>'Seleccionar...', 1 =>'Texto', 2 =>'Check', 3 =>'Lista', 4 =>'Radio'];
 
 ?>
 
@@ -21,44 +31,44 @@ use app\models\RespuestaTipo;
             	    'action'=>['encuesta/crear'],
 	                'options'=>['class'=>'form form-horizontal'],
             	])?>
-    <?php echo Html::textInput('idPregunta', 0, ['hidden'=>true])?>     	
+      	
+  
 	<?= $form->field($model, 'encTitulo')->textInput(['maxlength'=>true])->label('Titulo de la encuesta:')?>
 	<?= $form->field($model, 'encDescripcion')->textInput(['maxlength'=>true])->label('Descripcion de la encuesta:')?>
 	
-	<div class='form-group'>
-		<?= Html::button('Agregar Pregunta',['class'=>'btn btn-primary', 'id'=>'btn-agregar']); ?>
-	</div>
-	<div class='container-fluent' id='preguntas'>
-    	<?php $items = ArrayHelper::map(RespuestaTipo::find()->all(), 'idRespTipo', 'respTipoDescripcion');?>
-    	
-	</div>
-	<div id='prueba'></div>
 	
-	
-	<div class='form-group'>
-		<?= Html::submitButton('Guardar', ['class'=>'btn btn-primary'])?>
+	<span id='preg' hidden=true>0</span>
+
+	<div id='input1' class='clonedInput inline '>
+		<div class='row'>
+    		<div class='col-sm-8'>
+    			
+    			<?= $form->field($model2, 'pregDescripcion')->textInput(['maxlength'=>true])->label('Pregunta:')?>
+    		</div>
+    		<div class='col-sm-3 col-sm-offset-1'>
+
+    			<?= $form->field($model2, 'idRespTipo')->dropDownList($opciones)->label('Tipo de respuesta: ');
+    			?>
+    		</div>
+		</div>
+	</div>
+	<div class='button-group'>
+    	<div class='col-sm-2'>
+    		<?= Html::button('Agregar Pregunta',['class'=>'btn btn-primary', 'id'=>'btnAdd']);//cambie nombre ?>
+    	</div>
+    	<div class='col-sm-offset-4 col-sm-2'>
+    		<?= Html::submitButton('Guardar', ['class'=>'btn btn-primary']) //este boton guarda todos los datos de la encuesta?>
+    	</div>
+    	<div class=' col-sm-2'>
+    		<?= Html::resetButton('Borrar', ['class'=>'btn btn-secondary']) //este boton guarda todos los datos de la encuesta?>
+    	</div>
+    	<div class=' col-sm-2'>
+    		<?= Html::a('Cancelar', Url::toRoute('site/index') ,['class'=>'btn btn-info']) //este boton guarda todos los datos de la encuesta?>
+    	</div>
 	</div>
 	<?php ActiveForm::end()?>
 </div>
 <?php 
-$this->registerJs("
-$(document).ready(function(){
-    $('#btn-agregar').on('click', function(){
-        var idPregunta=$('#idPregunta').val();
-        var x=new XMLHttpRequest();
-    	x.onreadystatechange = function(){
-    		if( this.readyState == 4 && this.status == 200){
-    	        resp=JSON.parse(this.responseText);
-    			$('#prueba').html(resp[0]);
-                $('#idPregunta').val(resp[1]);
-    		}
-    	};
-    	x.open('POST', '/encuesta/views/Encuesta/generaPregunta.php', true);
-    	x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    	x.send('idPregunta='+idPregunta);
-        
-    });
-});
-", View::POS_READY);
+AppAsset::register($this); //agrega el script JS que se quiere usar. Antes lo especifique en la clase AppAsset
 
 ?>
