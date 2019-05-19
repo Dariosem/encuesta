@@ -1,8 +1,9 @@
 <?php
 
+
 /* En esta vista se genera la edicion de la encuesta. inicialmente presenta la opcion de ingreso del titulo y una descripcion
- * y luego se pueden agregar las preguntas y el tipo de respuesta que tendra esa pregunta 
-*/
+ * y luego se pueden agregar las preguntas y el tipo de respuesta que tendra esa pregunta
+ */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;

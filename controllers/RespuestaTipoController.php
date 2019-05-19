@@ -5,26 +5,29 @@ namespace app\controllers;
 use Yii;
 use app\models\RespuestaTipo;
 use app\models\RespuestaTipoSearch;
-use yii\web\Controller;
+//use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\base\Controller;
 
 /**
  * RespuestaTipoController implements the CRUD actions for RespuestaTipo model.
  */
 class RespuestaTipoController extends Controller
 {
+    
     /**
      * Devuelve el listado de los tipos de respuesta posible
      * @return array
      */
-    public static function listaTipos()
+    public static function listaTipos($idRespTipo = null)
     {
+        
         $opciones=new RespuestaTipoSearch();
-        $lista=$opciones->find()->all();
+        $lista=$opciones->find()->where('idRespTipo')->all();
         
         return $lista;
-    }
+    } 
     
     /**
      * {@inheritdoc}
